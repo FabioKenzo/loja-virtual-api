@@ -1,0 +1,24 @@
+services:
+  mysql-loja:
+    image: mysql:8
+    container_name: mysql-loja
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: loja_virtual
+    ports:
+      - "3306:3306"
+
+  spring-loja:
+    build: .
+    container_name: spring-loja
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql-loja
+    environment:
+      # Aqui conecta as variaveis do application.properties com o Docker
+      - DB_HOST=mysql-loja
+      - DB_USER=root
+      - DB_PASSWORD=root
+      # Mantem a URL completa para garantir o fuso horario e SSL
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-loja:3306/loja_virtual?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC

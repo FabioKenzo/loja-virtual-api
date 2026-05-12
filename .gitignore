@@ -1,0 +1,49 @@
+# === CONFIGS ===
+# Ignora o arquivo de configS reais com senhas
+src/main/resources/application.properties
+
+
+!src/main/resources/application.properties.example
+
+# === ARQUIVOS DE COMPILAÇÃO (MAVEN/JAVA) ===
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# NAO ignorA o wrapper do maven, pois ele ajuda outros a rodarem o projeto
+!.mvn/wrapper/maven-wrapper.jar
+
+# === IDES ===
+.vscode/
+.idea/
+*.iws
+*.iml
+*.ipr
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+# === SISTEMA OPERACIONAL E LOGS ===
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === DOCKER ===
+.docker/
