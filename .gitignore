@@ -2,8 +2,14 @@
 # Ignora o arquivo de configS reais com senhas
 src/main/resources/application.properties
 
-
 !src/main/resources/application.properties.example
+
+# === ARQUIVOS .ENV (VARIÁVEIS DE AMBIENTE) ===
+# Ignora arquivos locais de credenciais para não expor senhas no GitHub
+.env
+.env.*
+**/.env
+**/.env.*
 
 # === ARQUIVOS DE COMPILAÇÃO (MAVEN/JAVA) ===
 target/

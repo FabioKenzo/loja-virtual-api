@@ -1,21 +1,27 @@
 # ===================================================================
 # ARQUIVO DE EXEMPLO - LOJA VIRTUAL API
-# Renomeie este arquivo para 'application.properties' e preencha os valores.
+# Renomeie este arquivo para 'application.properties' antes de rodar localmente.
 # ===================================================================
 
-# Configurações do Banco de Dados
-# Se estiver usando Docker, o host deve ser o nome do serviço (ex: mysql-loja)
-spring.datasource.url=jdbc:mysql://${DB_HOST:localhost}:3306/loja_virtual?useSSL=false&serverTimezone=UTC
-spring.datasource.username=seu_usuario_aqui
-spring.datasource.password=sua_senha_aqui
+# Configurações de Conexão com o Banco de Dados
+# O Spring utilizará as variáveis de ambiente injetadas pelo Docker. 
+# Caso rode localmente fora do container, ele assume os valores padrão após os dois-pontos (:).
+spring.datasource.url=jdbc:mysql://${DB_HOST:localhost}:3306/loja_virtual?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+spring.datasource.username=${DB_USER:root}
+spring.datasource.password=${DB_PASSWORD:root}
 
-# Configurações do Hibernate/JPA
+# Configurações do Hibernate / JPA
+# Atualiza o esquema do banco automaticamente com base nas entidades Java
 spring.jpa.hibernate.ddl-auto=update
+# Exibe e formata os comandos SQL no console para fins de debug
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
 spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
 
-# Porta da Aplicação
+# Configurações do Servidor
 server.port=8080
 
-# Documentação Swagger disponível em: /swagger-ui.html
+# ===================================================================
+# Documentação da API (Swagger UI) disponível em:
+# http://localhost:8080/swagger-ui/index.html
+# ===================================================================
