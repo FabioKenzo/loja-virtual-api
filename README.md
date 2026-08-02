@@ -1,84 +1,293 @@
 # 🛒 Loja Virtual API
 
-Esta é uma API RESTful robusta desenvolvida para o gerenciamento de uma loja virtual, focada em escalabilidade, segurança e alta disponibilidade. O projeto foi construído utilizando as tecnologias mais recentes do ecossistema Java para garantir um backend de alta performance.
+Uma API RESTful desenvolvida em **Java** utilizando **Spring Boot**, criada para simular o backend de uma loja virtual. O projeto foi desenvolvido com foco em boas práticas de arquitetura, segurança, containerização e deploy em nuvem, proporcionando uma base sólida para aplicações escaláveis.
 
-## 🚀 Tecnologias Utilizadas
+---
 
-* **Java 25:** Utilizando as funcionalidades mais recentes da linguagem para um código moderno e eficiente.
-* **Spring Boot 3:** Framework base para criação de microsserviços e APIs rápidas.
-* **Spring Data JPA / Hibernate:** Para persistência de dados e mapeamento objeto-relacional.
-* **MySQL 8.4 (LTS):** Banco de dados relacional para armazenamento seguro de informações via containers.
-* **Docker & Docker Compose:** Containerização completa da aplicação e do banco de dados, facilitando o deploy e isolamento de ambientes.
-* **Swagger (OpenAPI 3):** Documentação interativa para teste e visualização dos endpoints da API.
-* **Maven:** Gerenciador de dependências e automação do build.
+# 🚀 Tecnologias Utilizadas
 
-## 🛠️ O que foi implementado
+- **Java 25**
+- **Spring Boot 3**
+- **Spring Data JPA**
+- **Hibernate**
+- **MySQL 8.4 LTS**
+- **Docker**
+- **Docker Compose**
+- **Swagger / OpenAPI 3**
+- **Maven**
+- **Microsoft Azure (VM Linux Ubuntu)**
 
-### 🏗️ Classes Principais e Validações
+---
 
-* **Modelagem de Entidades (POO):** Classes estruturadas com foco em Programação Orientada a Objetos, garantindo que atributos como nome, preço e estoque sigam regras de negócio rigorosas.
+# 📌 Funcionalidades Implementadas
 
-* **Tratamento Global de Exceções:** Implementação de um `ResourceExceptionHandler` (`@ControllerAdvice`) e classes de erro personalizadas para garantir que a API retorne respostas claras, padronizadas e elegantes (como erro 400 Bad Request) em caso de falhas.
+## 🏗️ Modelagem da Aplicação
 
-* **Validações de Dados:** Camada de lógica para assegurar a integridade e consistência dos dados persistidos no MySQL.
+- Desenvolvimento seguindo os princípios da Programação Orientada a Objetos (POO);
+- Modelagem das entidades utilizando JPA/Hibernate;
+- Relacionamentos entre entidades;
+- Persistência de dados utilizando MySQL.
 
-### 🐳 Docker & Infraestrutura
+---
 
-* **Dockerfile:** Configurado para criar imagens otimizadas utilizando o ambiente Java 25.
+## ✅ Validação de Dados
 
-* **Docker Compose:** Orquestração completa permitindo subir a API e o Banco de Dados com um único comando, utilizando redes customizadas (`bridge`) e `healthcheck` para garantir que a API só inicialize após o banco estar 100% saudável.
+Foram implementadas validações para garantir a integridade das informações recebidas pela API.
 
-### 🛡️ Segurança e Boas Práticas
+Exemplos:
 
-* **Segurança de Credenciais (12-Factor App):** Implementação rigorosa de `.gitignore` e arquivos de exemplo (`application.properties.example`) com placeholders. As senhas e dados sensíveis são injetados dinamicamente como variáveis de ambiente pelos containers Docker, nunca ficando expostas no controle de versão.
+- Campos obrigatórios;
+- Validação de estoque;
+- Validação de preços;
+- Consistência dos dados persistidos.
 
-## 📜 Documentação Interativa
+---
 
-A API conta com documentação completa via Swagger. Após rodar o projeto, você pode visualizar e testar os endpoints em:
+## ⚠️ Tratamento Global de Exceções
 
-[http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+A API possui um tratamento global de exceções utilizando:
 
-## 🔧 Como Rodar o Projeto
+- `@ControllerAdvice`
+- `ResourceExceptionHandler`
+- Classes personalizadas para respostas de erro
 
-**1. Clone o repositório:**
+Com isso, a aplicação retorna mensagens padronizadas e amigáveis para o consumidor da API.
+
+Exemplos de respostas tratadas:
+
+- **400 Bad Request**
+- **404 Not Found**
+- **500 Internal Server Error**
+
+---
+
+# 🔐 Segurança
+
+O projeto segue boas práticas inspiradas no conceito **12-Factor App**, mantendo informações sensíveis fora do código-fonte.
+
+Entre elas:
+
+- utilização de variáveis de ambiente;
+- arquivo `application.properties.example`;
+- credenciais protegidas através do `.gitignore`;
+- nenhuma senha armazenada no repositório.
+
+---
+
+# 🐳 Docker
+
+Toda a aplicação pode ser executada através do Docker.
+
+Foram utilizados:
+
+## Dockerfile
+
+Responsável pela criação da imagem da aplicação Java.
+
+## Docker Compose
+
+Responsável por orquestrar:
+
+- API Spring Boot;
+- Banco MySQL.
+
+Além disso, foram configurados:
+
+- rede customizada (`bridge`);
+- healthcheck do banco;
+- dependência entre containers;
+- variáveis de ambiente.
+
+---
+
+# 📖 Documentação da API
+
+A aplicação possui documentação automática utilizando **Swagger/OpenAPI**.
+
+Após iniciar o projeto, basta acessar:
+
+```text
+http://localhost:8080/swagger-ui/index.html
+```
+
+Lá é possível visualizar todos os endpoints e realizar testes diretamente pelo navegador.
+
+---
+
+# 🚀 Executando o Projeto
+
+## 1️⃣ Clone o repositório
 
 ```bash
 git clone https://github.com/FabioKenzo/loja-virtual-api.git
+
 cd loja-virtual-api
 ```
 
-**2. Configure o ambiente:**
+---
 
-Renomeie ou copie o arquivo de exemplo para as configurações oficiais do Spring Boot:
+## 2️⃣ Configure o arquivo de propriedades
+
+Copie o arquivo de exemplo:
 
 ```bash
 cp src/main/resources/application.properties.example src/main/resources/application.properties
 ```
 
-(No Windows Explorer, basta duplicar o arquivo `application.properties.example` e renomeá-lo para `application.properties` na mesma pasta).
+No Windows, basta duplicar o arquivo:
 
-**3. Suba os containers com Docker Compose:**
+```text
+application.properties.example
+```
+
+e renomeá-lo para:
+
+```text
+application.properties
+```
+
+---
+
+## 3️⃣ Execute os containers
 
 ```bash
 docker compose up -d
 ```
 
-O Docker irá baixar as imagens, configurar a rede, aplicar os parâmetros de ambiente e subir a aplicação pronta para o uso.
+O Docker irá automaticamente:
 
-## 📈 Intuito Acadêmico
+- baixar as imagens necessárias;
+- criar a rede da aplicação;
+- iniciar o banco MySQL;
+- aguardar o banco ficar saudável;
+- iniciar a API.
 
-Este projeto foi desenvolvido por Fabio Kenzo Okamura como parte de um plano estratégico de aprofundamento técnico em:
+---
 
-* Java (POO) e padrões de projeto.
-* Spring Boot para APIs escaláveis.
-* MySQL para gerenciamento de dados relacionais e engenharia reversa.
-* Swagger para documentação profissional de software.
-* Docker para automação de infraestrutura e cultura DevOps.
+# ☁️ Deploy na Microsoft Azure
 
-## 👤 Autor
+Este projeto também foi implantado em ambiente de nuvem utilizando a infraestrutura da **Microsoft Azure**, com o objetivo de validar o funcionamento da aplicação em um ambiente próximo ao de produção.
+
+## 🏗️ Arquitetura Utilizada
+
+- Máquina Virtual Linux Ubuntu;
+- Docker;
+- Docker Compose;
+- Spring Boot;
+- MySQL.
+
+---
+
+## ⚙️ Infraestrutura
+
+A implantação foi realizada em uma **Azure Virtual Machine (VM)** utilizando containers Docker.
+
+A infraestrutura foi composta por:
+
+- VM Ubuntu;
+- Docker Engine;
+- Docker Compose;
+- Spring Boot;
+- MySQL;
+- Network Security Group (NSG).
+
+---
+
+## 🌐 Configuração de Rede
+
+Foi realizada a configuração das regras de entrada no **Network Security Group (NSG)** para permitir acesso externo à aplicação através da porta:
+
+```text
+8080
+```
+
+---
+
+# 📸 Evidências do Deploy e Funcionamento
+
+Abaixo estão algumas evidências do processo de implantação e validação da aplicação em ambiente de nuvem utilizando a Microsoft Azure.
+
+---
+
+## 1️⃣ Build da Aplicação e Criação das Imagens Docker
+
+![Build e Docker](./01-build-e-docker.png)
+
+*Compilação do projeto utilizando Maven (Java 25) e criação das imagens Docker da aplicação.*
+
+---
+
+## 2️⃣ Inicialização dos Containers
+
+![Logs do Spring](./02-logs-spring.png)
+
+*Containers da API e do MySQL em execução, com o Spring Boot inicializado e conectado corretamente ao banco de dados.*
+
+---
+
+## 3️⃣ Configuração do Firewall (Network Security Group)
+
+![Configuração NSG Azure](./03-configuracao-nsg-azure.png)
+
+*Configuração das regras de entrada no Network Security Group (NSG), permitindo acesso externo à aplicação pela porta **8080**.*
+
+---
+
+## 4️⃣ Documentação OpenAPI / Swagger
+
+![Swagger UI na Azure](./04-swagger-overview.png)
+
+*Interface do Swagger disponível publicamente após o deploy da aplicação na máquina virtual da Microsoft Azure.*
+
+---
+
+## 5️⃣ Teste End-to-End e Persistência de Dados
+
+![Teste da API](./05-teste-api-database.png)
+
+*Execução do endpoint `POST /clientes`, retornando **HTTP 201 (Created)** e persistindo os dados com sucesso no banco MySQL hospedado na Azure.*
+
+---
+
+# 💰 FinOps
+
+Após a conclusão dos testes e validação da infraestrutura, todos os recursos utilizados na Azure foram removidos através da exclusão do **Resource Group**.
+
+Essa prática evita cobranças desnecessárias e demonstra preocupação com boas práticas de gerenciamento de custos em ambientes Cloud.
+
+---
+
+# 🎯 Objetivos do Projeto
+
+Este projeto foi desenvolvido com o objetivo de aprofundar conhecimentos em:
+
+- Java;
+- Programação Orientada a Objetos;
+- Spring Boot;
+- Spring Data JPA;
+- Hibernate;
+- MySQL;
+- Docker;
+- Docker Compose;
+- Swagger/OpenAPI;
+- Deploy em Cloud;
+- Microsoft Azure;
+- DevOps;
+- Infraestrutura como Código.
+
+---
+
+# 👨‍💻 Autor
 
 **Fábio Kenzo Okamura**
 
-Graduando em Análise e Desenvolvimento de Sistemas (ADS) - UNITAU.
+Graduando em **Análise e Desenvolvimento de Sistemas** pela **UNITAU**.
 
-Foco em Desenvolvimento Backend, Java e DevOps.
+Focado em:
+
+- Desenvolvimento Backend Java;
+- Spring Boot;
+- APIs REST;
+- Docker;
+- DevOps;
+- Cloud Computing.
