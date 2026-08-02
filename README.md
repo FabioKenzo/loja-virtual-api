@@ -219,7 +219,7 @@ Abaixo estão algumas evidências do processo de implantação e validação da 
 
 ## 2️⃣ Inicialização dos Containers
 
-![Logs do Spring](./02-logs-spring.png)
+![Logs do Spring](./02-docker-e-logs-spring.png)
 
 *Containers da API e do MySQL em execução, com o Spring Boot inicializado e conectado corretamente ao banco de dados.*
 
